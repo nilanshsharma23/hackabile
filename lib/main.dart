@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hackabile/color_schemes.dart';
-import 'package:hackabile/router.dart';
+import 'package:hackabile/classes/color_schemes.dart';
+import 'package:hackabile/utils/router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
