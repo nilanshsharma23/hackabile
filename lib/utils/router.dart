@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackabile/classes/globals.dart';
-import 'package:hackabile/pages/api_key_page.dart';
+import 'package:hackabile/pages/username_page.dart';
 import 'package:hackabile/pages/home_page.dart';
 import 'package:hackabile/pages/leaderboards_page.dart';
 import 'package:hackabile/pages/projects_page.dart';
@@ -19,7 +19,7 @@ final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>(
 final GoRouter router = GoRouter(
   navigatorKey: rootNavigatorKey,
   debugLogDiagnostics: true,
-  initialLocation: '/api-key',
+  initialLocation: '/username',
   routes: [
     ShellRoute(
       navigatorKey: shellNavigatorKey,
@@ -37,16 +37,16 @@ final GoRouter router = GoRouter(
       ],
     ),
     GoRoute(
-      path: '/api-key',
-      builder: (context, state) => ApiKeyPage(),
+      path: '/username',
+      builder: (context, state) => UsernamePage(),
       redirect: (context, state) async {
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
 
-        final String? apiKey = sharedPreferences.getString('api_key');
+        final String? apiKey = sharedPreferences.getString('username');
 
         if (apiKey != null) {
-          Globals.apiKey = apiKey;
+          Globals.username = apiKey;
         }
 
         return apiKey == null ? null : '/';

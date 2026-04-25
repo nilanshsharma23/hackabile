@@ -1,19 +1,20 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackabile/classes/globals.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class ApiKeyPage extends StatefulWidget {
-  const ApiKeyPage({super.key});
+class UsernamePage extends StatefulWidget {
+  const UsernamePage({super.key});
 
   @override
-  State<ApiKeyPage> createState() => _ApiKeyPageState();
+  State<UsernamePage> createState() => _UsernamePageState();
 }
 
-class _ApiKeyPageState extends State<ApiKeyPage> {
+class _UsernamePageState extends State<UsernamePage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController apiKeyController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
 
   bool loading = false;
 
@@ -30,52 +31,65 @@ class _ApiKeyPageState extends State<ApiKeyPage> {
             spacing: 8,
             children: [
               Text(
-                "Enter Your API Key",
+                "Enter Your Hackatime Username",
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
-              Row(
-                spacing: 4,
-                children: [
-                  Text(
-                    "Don't have your API key?",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      await launchUrlString(
-                        'https://hackatime.hackclub.com/my/settings/access#user_api_key',
-                      );
-                    },
-                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                    child: Text(
-                      "Get it here!",
+              SizedBox(height: 8),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(fontSize: 16),
+                  children: [
+                    TextSpan(text: "Don't know your username? "),
+                    TextSpan(
+                      text: "Get it here!",
                       style: TextStyle(
-                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.bold,
                       ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          await launchUrlString(
+                            'https://hackatime.hackclub.com/my/settings#user_username',
+                          );
+                        },
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(fontSize: 16),
+                  children: [
+                    TextSpan(text: "Make sure you have "),
+                    TextSpan(
+                      text: "enabled",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          await launchUrlString(
+                            'https://hackatime.hackclub.com/my/settings#user_privacy',
+                          );
+                        },
+                    ),
+                    TextSpan(text: " \"Allow public stats lookup\". "),
+                  ],
+                ),
+              ),
+              SizedBox(height: 8),
               TextFormField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(borderSide: BorderSide.none),
                   filled: true,
                   fillColor: Theme.of(context).colorScheme.surfaceContainer,
-                  hintText: "API Key",
+                  hintText: "Username",
                 ),
+                controller: usernameController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Please enter something.";
-                  }
-
-                  final apiKeyRegex = RegExp(
-                    r'^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$',
-                    caseSensitive: false,
-                  );
-
-                  if (!apiKeyRegex.hasMatch(value.trim())) {
-                    return "Invalid API Key.";
                   }
 
                   return null;
@@ -97,11 +111,11 @@ class _ApiKeyPageState extends State<ApiKeyPage> {
                         await SharedPreferences.getInstance();
 
                     await sharedPreferences.setString(
-                      'api_key',
-                      apiKeyController.text.trim(),
+                      'username',
+                      usernameController.text.trim(),
                     );
 
-                    Globals.apiKey = apiKeyController.text.trim();
+                    Globals.username = usernameController.text.trim();
 
                     if (context.mounted) {
                       context.go('/');

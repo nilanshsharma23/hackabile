@@ -1,3 +1,3 @@
 class Globals {
-  static String? apiKey;
+  static String? username;
 }
