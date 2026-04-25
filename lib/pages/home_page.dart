@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: TextButton(
           onPressed: () async {
-            debugPrint(await getStats());
+            debugPrint((await getStats()).toString());
           },
           child: Text("Hojme"),
         ),
