@@ -45,6 +45,7 @@ class _LeaderboardsPageState extends State<LeaderboardsPage> {
                     borderSide: BorderSide(
                       color: Theme.of(context).colorScheme.outline,
                     ),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   label: Text("Date Range"),
                 ),
@@ -70,6 +71,7 @@ class _LeaderboardsPageState extends State<LeaderboardsPage> {
                         border: Border.all(
                           color: Theme.of(context).colorScheme.primary,
                         ),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       padding: EdgeInsets.all(16),
                       child: Column(
@@ -91,6 +93,7 @@ class _LeaderboardsPageState extends State<LeaderboardsPage> {
                         border: Border.all(
                           color: Theme.of(context).colorScheme.primary,
                         ),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       padding: EdgeInsets.all(16),
                       child: Column(

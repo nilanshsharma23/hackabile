@@ -43,6 +43,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
                     borderSide: BorderSide(
                       color: Theme.of(context).colorScheme.outline,
                     ),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   label: Text("Date Range"),
                 ),

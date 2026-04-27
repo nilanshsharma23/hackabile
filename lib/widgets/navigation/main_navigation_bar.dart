@@ -15,7 +15,7 @@ class MainNavigationBar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: Theme.of(context).colorScheme.outline),
+          top: BorderSide(color: Theme.of(context).colorScheme.secondary),
         ),
       ),
       child: NavigationBar(

@@ -11,12 +11,12 @@ class ChartTemplate extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainer,
-        border: Border.all(color: Theme.of(context).colorScheme.outline),
+        border: Border.all(color: Theme.of(context).colorScheme.primary),
         borderRadius: BorderRadius.circular(16),
       ),
       padding: EdgeInsets.all(8),
       child: Column(
-        spacing: 4,
+        spacing: 16,
         children: [
           Text(
             title,
