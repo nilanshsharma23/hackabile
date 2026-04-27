@@ -23,9 +23,9 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsetsGeometry.all(16),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsetsGeometry.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 16,
@@ -34,8 +34,50 @@ class _ProjectsPageState extends State<ProjectsPage> {
                 "My Projects",
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
+              DropdownMenu(
+                width: double.infinity,
+                decorationBuilder: (context, controller) => InputDecoration(
+                  fillColor: Theme.of(context).colorScheme.surfaceContainer,
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+                  ),
+                  label: Text("Date Range"),
+                ),
+                onSelected: (value) {
+                  setState(() {
+                    getProjectsFuture = getProjects(dateTimeRange: value);
+                  });
+                },
+                dropdownMenuEntries: [
+                  DropdownMenuEntry(value: null, label: "All Time"),
+                  DropdownMenuEntry(
+                    value: DateTimeRange(
+                      start: DateTime.now(),
+                      end: DateTime.now().add(Duration(days: 1)),
+                    ),
+                    label: "Today",
+                  ),
+                  DropdownMenuEntry(
+                    value: DateTimeRange(
+                      start: DateTime.now().subtract(Duration(days: 1)),
+                      end: DateTime.now(),
+                    ),
+                    label: "Yesterday",
+                  ),
+                  DropdownMenuEntry(
+                    value: DateTimeRange(
+                      start: DateTime.now().subtract(Duration(days: 7)),
+                      end: DateTime.now(),
+                    ),
+                    label: "This Week",
+                  ),
+                ],
+              ),
               FutureBuilder(
-                future: getProjects(),
+                future: getProjectsFuture,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Column(
