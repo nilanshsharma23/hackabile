@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackabile/classes/project_object.dart';
+import 'package:hackabile/functions/format_seconds.dart';
 
 class ProjectTemplate extends StatelessWidget {
   const ProjectTemplate({super.key, required this.projectObject});
@@ -25,7 +26,7 @@ class ProjectTemplate extends StatelessWidget {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            "14h 47m 58s",
+            formatSeconds(totalSeconds: projectObject.totalSeconds),
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
