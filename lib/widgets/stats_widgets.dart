@@ -18,6 +18,14 @@ class StatsWidgets extends StatelessWidget {
           title: "Total Time",
           data: statsObject.humanReadableTotal,
         ),
+        InfoCardTemplate(
+          title: "Top Project",
+          data: statsObject.projects[0].name,
+        ),
+        InfoCardTemplate(
+          title: "Top Language",
+          data: statsObject.languages[0].name,
+        ),
         InfoCardTemplate(title: "Streak", data: "${statsObject.streak} days"),
         ChartTemplate(
           title: "Projects",

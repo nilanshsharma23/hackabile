@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hackabile/classes/languages_object.dart';
+import 'package:hackabile/classes/project_object.dart';
 import 'package:hackabile/classes/stats_object.dart';
 import 'package:hackabile/functions/get_stats.dart';
 import 'package:hackabile/widgets/stats_widgets.dart';
@@ -91,8 +93,21 @@ class _HomePageState extends State<HomePage> {
                       statsObject: StatsObject(
                         totalSeconds: 100000,
                         humanReadableTotal: BoneMock.title,
-                        projects: [],
-                        languages: [],
+                        projects: [
+                          ProjectObject(
+                            name: BoneMock.name,
+                            totalSeconds: 101010,
+                            languages: [],
+                          ),
+                        ],
+                        languages: [
+                          LanguagesObject(
+                            name: BoneMock.name,
+                            totalSeconds: 1010,
+                            digital: "10101010",
+                            color: Colors.white,
+                          ),
+                        ],
                         streak: 2,
                       ),
                     ),
