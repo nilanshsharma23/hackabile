@@ -1,17 +1,18 @@
 import "dart:convert";
 
-import "package:flutter/widgets.dart";
+import "package:flutter/material.dart";
 import "package:hackabile/classes/globals.dart";
 import "package:hackabile/classes/languages_object.dart";
 import "package:hackabile/classes/project_object.dart";
 import "package:hackabile/classes/stats_object.dart";
+import "package:hackabile/functions/format_date.dart";
 import "package:http/http.dart" as http;
 
-Future<StatsObject> getStats({String? startDate, String? endDate}) async {
+Future<StatsObject> getStats({DateTimeRange? dateTimeRange}) async {
   late Uri uri;
-  if (startDate != null && endDate != null) {
+  if (dateTimeRange != null) {
     uri = Uri.parse(
-      'https://hackatime.hackclub.com/api/v1/users/${Globals.username!}/stats?start_date=$startDate?end_date=$endDate',
+      'https://hackatime.hackclub.com/api/v1/users/${Globals.username!}/stats?start_date=${formatDate(dateTimeRange.start)}?end_date=${formatDate(dateTimeRange.end)}',
     );
   } else {
     uri = Uri.parse(
@@ -41,20 +42,17 @@ Future<StatsObject> getStats({String? startDate, String? endDate}) async {
   return StatsObject(
     totalSeconds: data['total_seconds'],
     humanReadableTotal: data['human_readable_total'],
-    projects: await getProjects(startDate: startDate, endDate: endDate),
+    projects: await getProjects(dateTimeRange: dateTimeRange),
     languages: languages,
     streak: data['streak'],
   );
 }
 
-Future<List<ProjectObject>> getProjects({
-  String? startDate,
-  String? endDate,
-}) async {
+Future<List<ProjectObject>> getProjects({DateTimeRange? dateTimeRange}) async {
   late Uri uri;
-  if (startDate != null && endDate != null) {
+  if (dateTimeRange != null) {
     uri = Uri.parse(
-      'https://hackatime.hackclub.com/api/v1/users/${Globals.username!}/projects/details?start_date=$startDate?end_date=$endDate',
+      'https://hackatime.hackclub.com/api/v1/users/${Globals.username!}/projects/details?start_date=${formatDate(dateTimeRange.start)}?end_date=${formatDate(dateTimeRange.end)}',
     );
   } else {
     uri = Uri.parse(
@@ -75,6 +73,8 @@ Future<List<ProjectObject>> getProjects({
     for (var i = 0; i < project['languages'].length; i++) {
       languages.add(project['languages'][i]);
     }
+
+    debugPrint(project.toString());
 
     projects.add(
       ProjectObject(
