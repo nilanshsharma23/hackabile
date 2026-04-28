@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hackabile/classes/globals.dart';
+import 'package:hackabile/widgets/form_field_template.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -79,13 +80,8 @@ class _UsernamePageState extends State<UsernamePage> {
                 ),
               ),
               SizedBox(height: 8),
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(borderSide: BorderSide.none),
-                  filled: true,
-                  fillColor: Theme.of(context).colorScheme.surfaceContainer,
-                  hintText: "Username",
-                ),
+              FormFieldTemplate(
+                hintText: "Username",
                 controller: usernameController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {

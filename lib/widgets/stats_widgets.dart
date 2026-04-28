@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hackabile/classes/stats_object.dart';
+import 'package:hackabile/functions/format_seconds.dart';
 import 'package:hackabile/widgets/chart_template.dart';
 import 'package:hackabile/widgets/info_card_template.dart';
 
@@ -38,7 +39,16 @@ class StatsWidgets extends StatelessWidget {
                   rotationQuarterTurns: 1,
                   alignment: BarChartAlignment.center,
                   groupsSpace: 8,
-
+                  barTouchData: BarTouchData(
+                    touchTooltipData: BarTouchTooltipData(
+                      tooltipBorderRadius: BorderRadius.circular(8),
+                      getTooltipItem: (group, groupIndex, rod, rodIndex) =>
+                          BarTooltipItem(
+                            formatSeconds(totalSeconds: rod.toY.toInt()),
+                            TextStyle(fontSize: 16),
+                          ),
+                    ),
+                  ),
                   gridData: FlGridData(show: false),
                   titlesData: FlTitlesData(show: false),
                   borderData: FlBorderData(show: false),
