@@ -20,5 +20,6 @@ No AI was used in this project whatsoever.
 
 ## Screenshots
 ![Home Page](screenshots/home.png "Home Page")
-![Home Page](screenshots/leaderboard.png "Leaderboard Page")
-![Home Page](screenshots/projects.png "Projects Page")
+![Leaderboard Page](screenshots/leaderboard.png "Leaderboard Page")
+![Projects Page](screenshots/projects.png "Projects Page")
+![Video](screenshots/video.mp4)
